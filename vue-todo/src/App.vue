@@ -1,8 +1,7 @@
 <template>
   <div id="app">
-    <TodoHeader></TodoHeader>
+    <TodoHeader v-bind:propsdata="title"></TodoHeader>
     <TodoInput v-on:addTodoItem='addOneItem' ></TodoInput>
-    
     <TodoList v-bind:propsdata="todoItems" v-on:removeItem="removeOneItem"
     v-on:toggleItem="togleOneItem"></TodoList>
     <TodoFooter v-on:clearAll='clearAllItems'></TodoFooter>
@@ -17,7 +16,8 @@ import TodoFooter from './components/TodoFooter.vue'
 export default {
   data:function(){
     return{
-      todoItems:[]
+      todoItems:[],
+      title:"TODO it"
     }
   },
   created:function(){
