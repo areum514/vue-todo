@@ -3,7 +3,8 @@
     <TodoHeader></TodoHeader>
     <TodoInput v-on:addTodoItem='addOneItem' ></TodoInput>
     
-    <TodoList v-bind:propsdata="todoItems" v-on:removeItem="removeOneItem"></TodoList>
+    <TodoList v-bind:propsdata="todoItems" v-on:removeItem="removeOneItem"
+    v-on:toggleItem="togleOneItem"></TodoList>
     <TodoFooter v-on:clearAll='clearAllItems'></TodoFooter>
   </div>
 </template>
@@ -43,6 +44,12 @@ export default {
     clearAllItems:function(){
       localStorage.clear()
       this.todoItems=[];
+    },
+    togleOneItem:function(todoItem,index){
+      //todoItem.completed=!todoItem.completed; 이거는 별로 안좋은 코드 
+      this.todoItems[index].completed=!this.todoItems[index].completed
+      localStorage.removeItem(todoItem.item);
+      localStorage.setItem(todoItem.item,JSON.stringify(todoItem));
     }
   },
  components:{
