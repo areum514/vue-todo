@@ -108,7 +108,43 @@ vuex 구조
 인터넷에 사진으로 보기~ 
 
 
-2. state, getters, mutations, actions
-data, competied , mehtod, 비동기 method
+2.vuex기술요소
+state, getters, mutations, actions
+1) state(여러 컴포넌트에 공유되는 데이터)
+    //vue
+    data:{
+        message: "Hello Vue.js!"
+    }
+
+    //vuex 
+    state:{
+        message: "Hello Vue.js!"
+    }
+    //vue
+    <p>{{message}} </p>
+    //vuex 
+    <p>{{this.$store.state.message}}</p>
+2) getters(state값을 접근하는 속성이자, computed() 처럼 미리 연산된 state값을 접근하는 속성 )
+    //store.js
+    state:{
+        num: 10 
+    },
+    getters:{
+        getNumber(state){
+            return state.num
+        },
+        doubleNumber(state){
+            return state.num*2;
+        }
+    }
+    <p>{{this.$store.getters.getNumber}}</p>
+    <p>{{this.$store.getters.doubleNumber}}</p>
+
+    
+
+3) mutations(state 값을 변경하는 이벤트 로직 메서드)
+4) action(비동기 처리 로직을 선언하는 메서드 ansnc mehtods)
+
+
 3. vuex를 더 쉽게 코딩할수 있는 helper기능
 4. vuex로 프로젝트를 구조화하는 방법과 모듈 구조화 방법
