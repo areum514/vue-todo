@@ -14,13 +14,13 @@ import TodoInput from './components/TodoInput.vue'
 import TodoList from './components/TodoList.vue'
 import TodoFooter from './components/TodoFooter.vue'
 export default {
-  data:function(){
+  data(){
     return{
       todoItems:[],
       title:"TODO it"
     }
   },
-  created:function(){
+  created(){
     if(localStorage.length>0){
       for(let i=0; i<localStorage.length;i++){
         if (localStorage.key(i)!=="loglevel:webpack-dev-server"){
@@ -31,21 +31,21 @@ export default {
     }
   },
   methods:{
-    addOneItem:function(todoItem){
+    addOneItem(todoItem){
       const obj={completed:false,item:todoItem }
       localStorage.setItem(todoItem,JSON.stringify(obj));
       this.todoItems.push(obj)
     },
-    removeOneItem:function(todoItem,index){
+    removeOneItem(todoItem,index){
       console.log(todoItem);
       localStorage.removeItem(todoItem.item)
       this.todoItems.splice(index,1)
     },
-    clearAllItems:function(){
+    clearAllItems(){
       localStorage.clear()
       this.todoItems=[];
     },
-    togleOneItem:function(todoItem,index){
+    togleOneItem(todoItem,index){
       //todoItem.completed=!todoItem.completed; 이거는 별로 안좋은 코드 
       this.todoItems[index].completed=!this.todoItems[index].completed
       localStorage.removeItem(todoItem.item);
@@ -54,10 +54,14 @@ export default {
   },
  components:{
    //컴포넌트 태크명: 컴포넌트 내용
-   'TodoHeader':TodoHeader,
+   TodoHeader,
+   TodoInput,
+   TodoList,
+   TodoFooter
+/*    'TodoHeader':TodoHeader,
    'TodoInput':TodoInput,
    'TodoList':TodoList,
-   'TodoFooter':TodoFooter
+   'TodoFooter':TodoFooter */
  },
  
  
