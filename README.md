@@ -1,5 +1,7 @@
 vue init webpack-simple vue-todo
 
+es6의 특징 
+
 1. const& let
 - const 한번 선언한값에 대해서 변경할 수 없음 (상수) 객체나 배열의 내부는 변경할수잇다~ const a={};
 a.num=10;
@@ -55,4 +57,58 @@ var dictionary={
 
     }
 }
-modules
+
+4. modules
+모듈은 특정 기능을 수행하는 단위 
+재사용성이 뛰어난 묶음을 가져다 쓰기 위해서 
+//libs/math.js
+export funciton sum(x,y){
+    return x+y;
+}
+export var pi=3.141593;
+
+main.js
+import {sum} from 'libs/math.js'
+sum(1,2);
+
+
+
+vuex - 상태 관리 라이브러리 
+복잡한 애플리케이션의 컴포넌트들을 효율적으로 관리하는 라이브러리
+무수히 많은 컴포넌트의 데이터를 관리하기 위한 관리 패턴이자 라이브러리
+react의 flux패턴에서 기인함 
+
+1. mvc ==> flux패턴 vuex
+mvc?
+controller -> model <->view
+- 기능 추가 및 변경에 따라 생기는 문제점을 예측할 수 없음 앱이 복잡해지면서 생기는 업데이트 루프
+flux란 ? mvc패턴의 복잡한 데이터 흐름 문제를 해결하는 개발 패턴으로 unidirectional data flow
+데이터의 흐름이 여러 갈래로 나뉘지 않고 단방향으로만 처리 
+acition -> dispatcher -> model -> view
+(화면에서 발생하는 이벤트 또는 사용자 입력)-> (데이터를 변경하는 방법, 메서드) -> (화면에 표시할 데이터) -> (사용자에게 비춰지는 화면)
+
+vuex가 왜 필요할까?
+복잡한 애플리케이션에서 컴포넌트의 개수가 많아지면 컴포넌트 간에 데이터 전달이 어려워진다. 
+vuex를 사용하면 아래와 같은 문제를 해결할수 있다. 
+1) mvc 패턴에서 발생하는 구조적 오류
+2) 컴포넌트 간 데이터 전달 명시
+3) 여러개의 컴포넌트에서 같은 데이터를 업데이트 할때 동기화 문제 
+
+Vuex컨셉: 
+view -> action -> state 
+  ^-----------------'  
+state: 컴포넌트 간에 공유하는 데이터 data()
+view:데이터를 표시하는 화면 template
+action: 사용자의 입력에 따라 데이터를 변경하는 methods
+
+화면(view)에서 사용자가 add버튼(action)을 누르면 data가 변경됨(state)
+
+vuex 구조
+컴포넌트 --> 비동기 로직 --> 동기로직 --> 상태
+인터넷에 사진으로 보기~ 
+
+
+2. state, getters, mutations, actions
+data, competied , mehtod, 비동기 method
+3. vuex를 더 쉽게 코딩할수 있는 helper기능
+4. vuex로 프로젝트를 구조화하는 방법과 모듈 구조화 방법
