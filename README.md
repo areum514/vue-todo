@@ -39,7 +39,7 @@ arr.forEach(funcgion(value){
 //ES6 함수 정의 방식
 var arr=["a","b","c"];
     console.log(value);
-arr.forEach(value=>)
+arr.forEach(value=>console.log(value);)
 
 3. enhanced objected literals 향상된 객체 리터럴
 
@@ -72,7 +72,7 @@ import {sum} from 'libs/math.js'
 sum(1,2);
 
 
-
+---------------------------------------------------------
 vuex - 상태 관리 라이브러리 
 복잡한 애플리케이션의 컴포넌트들을 효율적으로 관리하는 라이브러리
 무수히 많은 컴포넌트의 데이터를 관리하기 위한 관리 패턴이자 라이브러리
@@ -180,6 +180,7 @@ commit()으로 동작시킨다.
 
 ?state는 왜 직접 변경하지 않고 mutations으로 변경할까?
 여러개의 컴포넌트에서 state값을 변경하는 경우 어느 컴포넌트에서 바꿨는지 추적하기 어렵다. 따라서 뷰의 반응성을 거스르지 않게 명시적으로 상태 변화를 수행
+페이스북 메신저를 예시로 복잡성을 설명함 
 
 4) action(비동기 처리 로직을 선언하는 메서드, 비동기 로직을 담당하는 mutations)
 - 데이터 요청, promise, ES6async과 같은 비동기 처리는 모두 actions에 선언
@@ -224,6 +225,56 @@ commit()으로 동작시킨다.
 언제 어느 컴포넌트에서 해당 state를 호출하고, 변경햇는지 확인하기가 어려움.. 
 만약 여러개의 컴포넌트에서 mutations로 시간 차를 두고 state를 변경하는 경우
 state 값의 변화를 추적하기 어렵기 때문에 mutations속성에는 동기 처리 로직만 넣어야 함
+
+
 3. vuex를 더 쉽게 코딩할수 있는 helper기능
+각 속성들을 더 쉽게 사용하는 방법 - helper
+state-> mapState
+getters-> mapGetters
+mutations -> mapMutations
+actions -> mapActions
+
+0) 사용법
+핼퍼를 사용하고자 하는 vue 파일에서 핼퍼를 로딩
+//App.vue
+import {mapState,mapGetters,mapMutations,mapActions} from 'vuex'
+
+export default{
+    conputed(){...mapState(['num']),...mapGetters(['countedNum'])},
+    methods:{
+        ...mapMutations(['clickBtn']), ...mapActions(['asyncClickBtn'])
+    }
+}
+...은 ES6의 Object Spread Operator
+
+1) mapState
+    //App.vue
+    import {mapState} from 'vuex'
+
+    computed(){
+        ...mapState(['num'])
+        //num(){return this.$store.state.num;}
+    }
+    //store.js
+    state:{
+        num:10
+    }
+    <p>{{this.num}}</p>
+    <!-- <p>{{this.$store.state.num}}</p> -->
+2) mapGetters
+    //App.vue
+    import {mapGetters} from 'vuex'
+
+    computed(){
+        ...mapGetters(['reverseMessage'])
+    }
+    //store.js
+    getters:{
+       reverseMessage(state){
+           return state.msg.split('').reverse().join('');
+       }
+    }
+    <p>{{this.reverseMessage}}</p>
+    <!-- <p>{{this.$store.getters.reverseMessage}}</p> -->
 4. vuex로 프로젝트를 구조화하는 방법과 모듈 구조화 방법
 

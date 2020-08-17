@@ -1,7 +1,7 @@
 <template>
   <div>
      <transition-group name="list" tag="ul">
-      <li v-for="(todoItem,index) in this.$store.state.todoItems" v-bind:key="todoItem" class="shodow">
+      <li v-for="(todoItem,index) in this.todoItems" v-bind:key="todoItem" class="shodow">
         <i class="fas fa-check checkBtn " 
           v-on:click="togleComplete(todoItem,index)"
           v-bind:class="{checkBtnCompleted:todoItem.completed}"></i>
@@ -30,6 +30,11 @@ export default {
       //this.$emit('toggleItem',todoItem,index)
     }
   },
+  computed:{
+    todoItems(){
+      return this.$store.getters.storedTodoItems
+    }
+  }
  
 }
 </script>
