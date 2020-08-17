@@ -276,5 +276,22 @@ export default{
     }
     <p>{{this.reverseMessage}}</p>
     <!-- <p>{{this.$store.getters.reverseMessage}}</p> -->
+3) mapMutations
+    //App.vue
+    import {mapMutations} from 'vuex'
+
+    mehtods:{
+        ...mapMutations(['clickBtn']),
+        authLogin(),
+        dispalyTable(){}
+    }
+    //store.js
+    mutations:{
+        clickBtn(state){
+            alert(state.msg)
+        }
+    }
+
+    <button @click="clickBtn"></button>
 4. vuex로 프로젝트를 구조화하는 방법과 모듈 구조화 방법
 

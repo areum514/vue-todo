@@ -10,12 +10,17 @@
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
+
 export default {
 methods:{
-  clearTodo(){
+  ...mapMutations({
+    clearTodo:'clearAllItems'
+  })
+  /* clearTodo(){
     this.$store.commit('clearAllItems')
     //this.$emit('clearAll');
-  }
+  } */
 }
 }
 </script>
