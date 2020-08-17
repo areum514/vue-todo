@@ -142,9 +142,48 @@ state, getters, mutations, actions
 
     
 
-3) mutations(state 값을 변경하는 이벤트 로직 메서드)
+3) mutations(state 값을 변경할 수 있는 유일한 방법이자 메서드)
+commit()으로 동작시킨다. 
+    //ex1
+    //store.js
+    state:{
+        num: 10 
+    },
+    mutations:{
+        printNumbers(state){
+            return state.num
+        },
+        sumNumbers(state,anotherNum){
+            return state.num+anotherNum;
+        }
+    }
+    //app.vue
+    this.$store.commit('printNumbers')
+    this.$store.commit('sumNumbers')
+    
+    //ex2
+    //store.js
+    state:{
+        storeNum: 10 
+    },
+    mutations:{
+        modifyState(state,payload){
+            console.log(payload.str);
+            return state.storeNum+=payload.num;
+        }
+    }
+    //app.vue
+    this.$store.commit('modifyState',{
+        str:'pass from payload',
+        num: 20
+    });
+
+?state는 왜 직접 변경하지 않고 mutations으로 변경할까?
+여러개의 컴포넌트에서 state값을 변경하는 경우 어느 컴포넌트에서 바꿨는지 추적하기 어렵다. 따라서 뷰의 반응성을 거스르지 않게 명시적으로 상태 변화를 수행
+
 4) action(비동기 처리 로직을 선언하는 메서드 ansnc mehtods)
 
 
 3. vuex를 더 쉽게 코딩할수 있는 helper기능
 4. vuex로 프로젝트를 구조화하는 방법과 모듈 구조화 방법
+

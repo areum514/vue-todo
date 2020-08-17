@@ -37,7 +37,9 @@ export default {
   methods:{
     addTodo(){
       if (this.newTodoItem!==''){
-        this.$emit('addTodoItem',this.newTodoItem);
+        /* this.$emit('addTodoItem',this.newTodoItem); */
+        const text=this.newTodoItem.trim();
+        this.$store.commit('addTodoItem',text);
         this.clearInput();
       } else{
 
